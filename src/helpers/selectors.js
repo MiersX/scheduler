@@ -22,3 +22,11 @@ export function getInterview(state, interview) {
   };
   return interviewData;
 };
+
+
+
+export function getInterviewersForDay() {
+
+
+
+};
