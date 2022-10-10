@@ -49,7 +49,6 @@ export default function Application(props) {
       .catch(err => {
       console.log(err.message)
     })}, [])
-    console.log(state.interviewers);
 
   return (
     <main className="layout">
