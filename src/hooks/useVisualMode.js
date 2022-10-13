@@ -1,9 +1,13 @@
 import { useState } from "react"; 
 
+// sets and stores the current mode, and a history of the modes transitioned to.
+
 export default function useVisualMode(initial) {
 
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
+
+  // transitions to a new mode, updates history and mode.
 
   function transition (newMode, replace = false) {
 
@@ -18,6 +22,8 @@ export default function useVisualMode(initial) {
     }
   
   }
+
+  // transitions back to a previous mode, updates history with change.
 
   function back() {
     if (history.length > 1) {

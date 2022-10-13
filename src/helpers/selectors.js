@@ -1,3 +1,6 @@
+
+// Returns an array of appointments based on day
+
 export function getAppointmentsForDay(state, day) {
 
   const filteredDays = state.days.filter(specificDay => specificDay.name === day);
@@ -10,6 +13,7 @@ export function getAppointmentsForDay(state, day) {
   return apptArr;
 }
 
+// returns an interview object that contains the interviewers info
 
 export function getInterview(state, interview) {
 
@@ -23,7 +27,7 @@ export function getInterview(state, interview) {
   return interviewData;
 };
 
-
+// returns an array of interviewers available for a day
 
 export function getInterviewersForDay(state, day) {
 

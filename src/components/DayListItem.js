@@ -2,8 +2,13 @@ import React from "react";
 import classNames from "classnames";
 import "./DayListItem.scss";
 
+// returns the DayListItem component
+
 export default function DayListItem(props) {
 
+
+  // Displays spots left for the day based on conditionals
+  
   const formatSpots =() => {
     if (props.spots > 1) {
       return props.spots +' spots remaining';

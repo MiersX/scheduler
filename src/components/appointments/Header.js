@@ -1,5 +1,7 @@
 import React from "react";
 
+// Returns the <Header/> component
+
 export default function Header(props) {
 
   return (

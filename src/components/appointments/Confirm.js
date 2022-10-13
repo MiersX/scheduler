@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "components/Button";
 
+// Returns the <Confirm/> component
+
 export default function Confirm(props) {
 
   return(

@@ -11,10 +11,13 @@ import Error from "./Error";
 
 
 
-
+//Returns the <Appointment/> component
 
 
 export default function Appointment(props) {
+
+
+// Possible modes we can be in
 
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
@@ -32,6 +35,7 @@ export default function Appointment(props) {
 
 
 
+  // Saves an interview
 
   const save = (name, interviewer) => {
     const interview = {
@@ -44,10 +48,13 @@ export default function Appointment(props) {
           .catch(error => transition(ERROR_SAVE, true));   
   }
 
+  // Transitions to the confirmation mode
 
   const destroyConfirmation = () => {
     transition(CONFIRM);
   }
+
+  // Destroys the interview object
 
   const destroy = () => {
     transition(DELETING, true);
@@ -56,11 +63,13 @@ export default function Appointment(props) {
           .catch(error => transition(ERROR_DELETE, true))
     }
 
+    // Transitions to the edit mode
+
     const editInterview = () => {
       transition(EDIT);
     }
 
-
+  // Conditionals that render the appropriate component based on mode
 
   return(
     <article className="appointment" data-testid="appointment">

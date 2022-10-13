@@ -1,5 +1,7 @@
 import React from "react";
 
+// Returns the <Empty/> component
+
 export default function Empty(props) {
 
   return(

@@ -3,6 +3,8 @@ import axios from "axios";
 import { getAppointmentsForDay } from "helpers/selectors";
 
 
+// returns the functions setDay, bookInterview, cancelInterview as well as the state. 
+
 export default function useApplicationData() {
 
 
@@ -13,21 +15,24 @@ export default function useApplicationData() {
     interviewers: {},
   });
 
-  
-  const setDay = day => setState({...state, day});
+  // Sets the day property of state
 
+  const setDay = day => setState((prev) => ({...prev, day}));
 
-  const selectDay = (day) => {
-    const week = {
+  // returns KVP based on input day
+
+  function selectDay(day) {
+    const dayInWeek = {
       Monday: 0,
       Tuesday: 1,
       Wednesday: 2,
       Thursday: 3,
-      Friday: 4,
+      Friday: 4
     }
-    return week[day];
+    return dayInWeek[day]
   }
 
+  // Books an interview
 
   const bookInterview = (id, interview) => {
 
@@ -41,13 +46,18 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
+    // Finds day based on state 
+
     const dayInWeek = selectDay(state.day);
+
+    // Create new day object and updates the spots property
 
     let day = {
       ...state.days[dayInWeek],
       spots: state.days[dayInWeek]
     }
-  
+    // if an interview exists, reduces available spots
+
     if (!state.appointments[id].interview) {
       day = {
         ...state.days[dayInWeek],
@@ -63,16 +73,14 @@ export default function useApplicationData() {
     let days = state.days
     days[dayInWeek] = day;
 
+    // Make update request to server, set state
 
-    return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
-    .then(() => {setState({...state, appointments})})
-    .then(() => {setState({...state, appointments, days})})
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
+    .then(() => setState({...state, appointments, days}));
   };
 
 
-
-
-
+  // Cancels an existing interview
 
   const cancelInterview = (id) => {
 
@@ -86,20 +94,24 @@ export default function useApplicationData() {
       [id]: appointment,
     };
 
+    // Finds day based on state 
+
     const dayInWeek = selectDay(state.day);
 
-    let day = {
+    // Creates day object, updates spots available for that day by 1
+
+    const day = {
       ...state.days[dayInWeek],
       spots: state.days[dayInWeek].spots + 1
     }
 
     let days = state.days
     days[dayInWeek] = day;
-  
+
+    // Make delete request to server, set state
 
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
-    .then(() => {setState({...state, appointments})})
-    .then(() => {setState({...state, appointments, days})})
+    .then(() => setState({...state, appointments, days}));
 
   };
 

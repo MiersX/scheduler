@@ -4,6 +4,8 @@ import "components/Button.scss";
 import { action } from "@storybook/addon-actions";
 import classNames from "classnames";
 
+// returns the button component
+
 export default function Button(props) {
    const buttonClass = classNames(
       'button', {

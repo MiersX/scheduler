@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
+// Returns the <Form/> component
 
 export default function Form(props) {
 
@@ -9,6 +10,7 @@ export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+// Resets the form
 
   const reset = () => {
     setStudent("");
@@ -16,10 +18,14 @@ export default function Form(props) {
     setInterviewer(null);
   }
 
+  // Calls the reset function and cancels
+
   const cancel = () => {
     reset();
     props.onCancel();
   }
+
+    // Validates entries to the form
 
   const validate = () => {
     if (student === "") {
